@@ -7,7 +7,6 @@
     </h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <!-- GitHub Overview Card -->
       <div class="stats-card group">
         <div class="card-gradient"></div>
         <h3 class="text-xl font-semibold mb-6 flex items-center">
@@ -34,7 +33,6 @@
         </div>
       </div>
 
-      <!-- Language Distribution -->
       <div class="stats-card group">
         <div class="card-gradient"></div>
         <h3 class="text-xl font-semibold mb-6 flex items-center">
@@ -71,7 +69,6 @@
         </div>
       </div>
 
-      <!-- Contribution Calendar -->
       <div class="md:col-span-2">
         <div class="stats-card group">
           <div class="card-gradient"></div>
@@ -146,55 +143,70 @@ const getLanguageColor = (language) => {
   return colors[language] || colors.default;
 };
 
+const fetchContributions = async () => {
+  try {
+    const response = await fetch(
+      "https://github-contributions-api.jogruber.de/v4/JYOTIPM1999"
+    );
+    const data = await response.json();
+
+    totalContributions.value = data.total?.sum || 0;
+  } catch (error) {
+    console.error("Error fetching contributions:", error);
+    totalContributions.value = 0;
+  }
+};
+
 const fetchGitHubStats = async () => {
   try {
     loading.value = true;
 
-    // Fetch basic user info
-    const userResponse = await fetch(
-      "https://api.github.com/users/JYOTIPM1999"
-    );
-    const userData = await userResponse.json();
-    stats.value = {
-      publicRepos: userData.public_repos,
-      followers: userData.followers,
-      following: userData.following,
-    };
+    await Promise.all([
+      (async () => {
+        const userResponse = await fetch(
+          "https://api.github.com/users/JYOTIPM1999"
+        );
+        const userData = await userResponse.json();
+        stats.value = {
+          publicRepos: userData.public_repos,
+          followers: userData.followers,
+          following: userData.following,
+        };
+      })(),
+      fetchContributions(),
+      (async () => {
+        const reposResponse = await fetch(
+          "https://api.github.com/users/JYOTIPM1999/repos"
+        );
+        const reposData = await reposResponse.json();
 
-    // Fetch repositories to calculate language stats
-    const reposResponse = await fetch(
-      "https://api.github.com/users/JYOTIPM1999/repos"
-    );
-    const reposData = await reposResponse.json();
+        const languageCounts = {};
+        let total = 0;
 
-    // Calculate language percentages
-    const languageCounts = {};
-    let total = 0;
+        reposData.forEach((repo) => {
+          if (repo.language) {
+            languageCounts[repo.language] =
+              (languageCounts[repo.language] || 0) + 1;
+            total++;
+          }
+        });
 
-    reposData.forEach((repo) => {
-      if (repo.language) {
-        languageCounts[repo.language] =
-          (languageCounts[repo.language] || 0) + 1;
-        total++;
-      }
-    });
+        Object.keys(languageCounts).forEach((language) => {
+          languageStats.value[language] = Math.round(
+            (languageCounts[language] / total) * 100
+          );
+        });
 
-    // Convert to percentages
-    Object.keys(languageCounts).forEach((language) => {
-      languageStats.value[language] = Math.round(
-        (languageCounts[language] / total) * 100
-      );
-    });
-
-    // Sort languages by percentage
-    const sortedStats = {};
-    Object.entries(languageStats.value)
-      .sort(([, a], [, b]) => b - a)
-      .slice(0, 5)
-      .forEach(([key, value]) => {
-        sortedStats[key] = value;
-      });
-    languageStats.value = sortedStats;
+        const sortedStats = {};
+        Object.entries(languageStats.value)
+          .sort(([, a], [, b]) => b - a)
+          .slice(0, 5)
+          .forEach(([key, value]) => {
+            sortedStats[key] = value;
+          });
+        languageStats.value = sortedStats;
+      })(),
+    ]);
   } catch (error) {
     console.error("Error fetching GitHub stats:", error);
   } finally {
@@ -238,10 +250,9 @@ onMounted(() => {
 }
 
 .contribution-chart img {
-  @apply w-full transition-opacity duration-300;
+  @apply w-full p-2 transition-opacity duration-300;
 }
 
-/* Animation delays */
 .fade-in-delay-0 {
   animation-delay: 0.1s;
 }
@@ -270,7 +281,6 @@ onMounted(() => {
   animation: fade-in 0.5s ease-out forwards;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .stats-card {
     @apply p-6;
@@ -281,7 +291,6 @@ onMounted(() => {
   }
 }
 
-/* Custom scrollbar */
 .stats-card {
   scrollbar-width: thin;
   scrollbar-color: rgba(99, 102, 241, 0.5) transparent;
@@ -299,7 +308,6 @@ onMounted(() => {
   @apply bg-blue-500/50 rounded-full;
 }
 
-/* Dark mode adjustments if needed */
 :root.dark .stats-card {
   @apply bg-gray-800;
 }
@@ -321,7 +329,6 @@ onMounted(() => {
   @apply bg-blue-500/50 rounded-full hover:bg-blue-600/50;
 }
 
-/* Activity item hover effect */
 .activity-item {
   @apply transition-all duration-300 hover:bg-gray-50 rounded-lg;
 }
@@ -343,7 +350,6 @@ onMounted(() => {
   @apply opacity-50;
 }
 
-/* Dark mode support */
 :root.dark .contribution-chart {
   @apply bg-gray-800;
   filter: invert(0.8) hue-rotate(180deg);
