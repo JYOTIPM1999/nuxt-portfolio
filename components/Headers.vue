@@ -76,7 +76,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 
 const active = ref("about");
 const sections = [
@@ -88,20 +88,55 @@ const sections = [
   "contacts",
 ];
 
+// Add scroll spy functionality
+const checkActiveSection = () => {
+  const sectionElements = sections.map((section) => ({
+    id: section,
+    element: document.querySelector(`#${section}`),
+  }));
+
+  const scrollPosition = window.scrollY + window.innerHeight / 3;
+
+  for (const { id, element } of sectionElements) {
+    if (element) {
+      const { top, bottom } = element.getBoundingClientRect();
+      const elementTop = top + window.pageYOffset;
+      const elementBottom = bottom + window.pageYOffset;
+
+      if (scrollPosition >= elementTop && scrollPosition <= elementBottom) {
+        active.value = id;
+        break;
+      }
+    }
+  }
+};
+
+// Improved scroll to section function
 const setActive = (section) => {
   active.value = section;
-
   const element = document.querySelector(`#${section}`);
-  const headerHeight = 64; // Reduced header height
-  const elementPosition = element.getBoundingClientRect().top;
-  const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+  if (element) {
+    const headerHeight = 70; // Match header height
+    const elementPosition = element.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
 
-  window.scrollTo({
-    top: offsetPosition,
-    behavior: "smooth",
-    duration: 1000,
-  });
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth",
+    });
+  }
 };
+
+// Lifecycle hooks
+onMounted(() => {
+  window.addEventListener("scroll", checkActiveSection);
+  // Initial check for active section
+  checkActiveSection();
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", checkActiveSection);
+});
 </script>
 
 <style scoped>
