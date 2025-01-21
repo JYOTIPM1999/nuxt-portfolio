@@ -69,7 +69,7 @@
         </div>
       </div>
 
-      <div class="md:col-span-2">
+      <div class="md:col-span-2 hidden md:block">
         <div class="stats-card group">
           <div class="card-gradient"></div>
           <h3 class="text-xl font-semibold mb-6 flex items-center">
@@ -288,6 +288,10 @@ onMounted(() => {
 
   .stat-item {
     @apply p-3;
+  }
+
+  .contribution-chart {
+    display: none;
   }
 }
 
