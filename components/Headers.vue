@@ -2,7 +2,6 @@
   <header class="header">
     <nav class="container mx-auto px-6">
       <div class="flex items-center justify-between w-full">
-        <!-- Logo Area with SVG -->
         <div class="logo-container">
           <div class="logo-svg">
             <svg viewBox="0 0 100 100" class="w-10 h-10 md:w-12 md:h-12">
@@ -18,7 +17,6 @@
                   <stop offset="100%" style="stop-color: #9333ea" />
                 </linearGradient>
               </defs>
-              <!-- Circular background -->
               <circle
                 cx="50"
                 cy="50"
@@ -26,7 +24,7 @@
                 fill="url(#logoGradient)"
                 class="logo-circle"
               />
-              <!-- JPM Text -->
+
               <text
                 x="50"
                 y="58"
@@ -39,7 +37,7 @@
               >
                 JPM
               </text>
-              <!-- Decorative ring -->
+
               <circle
                 cx="50"
                 cy="50"
@@ -58,7 +56,6 @@
           </div>
         </div>
 
-        <!-- Desktop Navigation with increased gap -->
         <div class="hidden md:flex items-center space-x-12">
           <a
             v-for="section in sections"
@@ -88,7 +85,6 @@ const sections = [
   "contacts",
 ];
 
-// Add scroll spy functionality
 const checkActiveSection = () => {
   const sectionElements = sections.map((section) => ({
     id: section,
@@ -111,12 +107,11 @@ const checkActiveSection = () => {
   }
 };
 
-// Improved scroll to section function
 const setActive = (section) => {
   active.value = section;
   const element = document.querySelector(`#${section}`);
   if (element) {
-    const headerHeight = 70; // Match header height
+    const headerHeight = 70;
     const elementPosition = element.getBoundingClientRect().top;
     const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
 
@@ -127,10 +122,9 @@ const setActive = (section) => {
   }
 };
 
-// Lifecycle hooks
 onMounted(() => {
   window.addEventListener("scroll", checkActiveSection);
-  // Initial check for active section
+
   checkActiveSection();
 });
 
@@ -155,10 +149,9 @@ onUnmounted(() => {
   @apply -z-10;
 }
 
-/* Logo Styling */
 .logo-container {
   @apply flex items-center gap-4 flex-shrink-0;
-  margin-right: 2rem; /* Add explicit margin */
+  margin-right: 2rem;
 }
 
 .logo-svg {
@@ -210,13 +203,12 @@ onUnmounted(() => {
   @apply text-xs md:text-sm text-white/80;
 }
 
-/* Navigation Links */
 .nav-link {
   @apply text-white/90 hover:text-white;
-  @apply text-base font-medium cursor-pointer; /* Adjusted text size */
+  @apply text-base font-medium cursor-pointer;
   @apply relative py-2 px-1;
   @apply transition-all duration-300;
-  white-space: nowrap; /* Prevent text wrapping */
+  white-space: nowrap;
 }
 
 .nav-link::before {
@@ -236,14 +228,12 @@ onUnmounted(() => {
   @apply text-white font-semibold;
 }
 
-/* Container adjustments */
 .container {
   @apply h-full flex items-center;
   @apply mx-auto;
-  max-width: 1400px; /* Increased max-width */
+  max-width: 1400px;
 }
 
-/* Optional: Add subtle animation for active link */
 .nav-link-active {
   @apply relative;
 }
