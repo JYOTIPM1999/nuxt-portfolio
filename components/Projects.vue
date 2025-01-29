@@ -6,7 +6,6 @@
       Featured Projects
     </h2>
 
-    <!-- Projects Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <div
         v-for="(project, index) in projects"
@@ -18,7 +17,6 @@
         <div
           class="relative overflow-hidden rounded-xl bg-white p-4 project-content"
         >
-          <!-- Project Image -->
           <div class="relative h-48 mb-4 overflow-hidden rounded-lg">
             <img
               :src="project.image"
@@ -29,7 +27,6 @@
               class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             ></div>
 
-            <!-- View Details Button -->
             <div
               class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             >
@@ -41,7 +38,6 @@
             </div>
           </div>
 
-          <!-- Project Info -->
           <div
             class="transform group-hover:translate-y-[-8px] transition-transform duration-300"
           >
@@ -54,7 +50,6 @@
               {{ project.description }}
             </p>
 
-            <!-- Tech Stack -->
             <div class="flex flex-wrap gap-2 mb-4">
               <span
                 v-for="tech in project.techStack"
@@ -65,7 +60,6 @@
               </span>
             </div>
 
-            <!-- Links -->
             <div
               class="flex gap-3 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 sm:opacity-100 md:opacity-0 md:group-hover:opacity-100"
             >
@@ -89,7 +83,6 @@
       </div>
     </div>
 
-    <!-- Project Details Modal -->
     <Transition name="fade">
       <div
         v-if="selectedProject"
@@ -274,7 +267,6 @@ const projects = ref([
 </script>
 
 <style scoped>
-/* Base styles */
 .project-card {
   @apply bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer;
   @apply transform hover:-translate-y-1;
@@ -304,7 +296,6 @@ const projects = ref([
   @apply hover:shadow-lg hover:shadow-blue-500/25;
 }
 
-/* Animations */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -320,7 +311,6 @@ const projects = ref([
   animation: fadeInUp 0.5s ease-out;
 }
 
-/* Animation delays for grid items */
 .delay-0 {
   animation-delay: 0.1s;
 }
@@ -343,7 +333,6 @@ const projects = ref([
   animation-delay: 0.7s;
 }
 
-/* FadeIn animation for cards */
 .project-card {
   @apply opacity-0;
   animation: fadeIn 0.5s ease-out forwards;
@@ -360,7 +349,6 @@ const projects = ref([
   }
 }
 
-/* Remove old slider styles */
 .slider-nav-btn,
 .navigation-btn,
 .side-nav-btn,

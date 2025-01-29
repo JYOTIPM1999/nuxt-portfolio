@@ -54,16 +54,13 @@
   </div>
 </template>
 
-<script setup>
-// Component logic can be added here
-</script>
+<script setup></script>
 
 <style scoped>
 .container {
   @apply my-12 relative;
 }
 
-/* Reuse the same animations from other components */
 .animate-fade-in {
   animation: fadeIn 1s ease-in;
 }

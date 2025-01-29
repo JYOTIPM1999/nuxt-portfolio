@@ -163,7 +163,6 @@ const experiences = ref([
   }
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .container {
     @apply px-4;
@@ -173,7 +172,6 @@ const experiences = ref([
     @apply w-full max-w-xs;
   }
 
-  /* Remove fixed height for mobile */
   .relative {
     min-height: auto;
     height: auto;

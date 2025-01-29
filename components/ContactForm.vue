@@ -242,7 +242,6 @@ const handleSubmit = async () => {
   @apply transition-all duration-200 focus:ring-2 focus:ring-blue-500/20;
 }
 
-/* Transitions */
 .fade-enter-active,
 .fade-leave-active {
   @apply transition-all duration-200;
@@ -253,7 +252,6 @@ const handleSubmit = async () => {
   @apply opacity-0 transform -translate-y-1;
 }
 
-/* Responsive adjustments */
 @screen md {
   .form-input {
     @apply text-base;

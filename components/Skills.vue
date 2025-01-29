@@ -480,7 +480,6 @@ const selectSkill = (skill) => {
   transform: translateY(20px);
 }
 
-/* Hide scrollbar but keep functionality */
 .overflow-x-auto {
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -490,7 +489,6 @@ const selectSkill = (skill) => {
   display: none;
 }
 
-/* Add these new styles */
 @media (max-width: 768px) {
   .container > div {
     position: relative;
@@ -498,7 +496,6 @@ const selectSkill = (skill) => {
   }
 }
 
-/* Mobile specific styles */
 .skill-card-mobile {
   @apply bg-white rounded-xl shadow-sm transition-all duration-200;
   @apply active:shadow-inner cursor-pointer;
@@ -515,7 +512,6 @@ const selectSkill = (skill) => {
   opacity: 0;
 }
 
-/* Hide scrollbar */
 .overflow-x-auto {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -525,7 +521,6 @@ const selectSkill = (skill) => {
   display: none;
 }
 
-/* Prevent body scroll when modal is open */
 :root {
   &:has(.fixed.inset-0) {
     overflow: hidden;
@@ -534,7 +529,7 @@ const selectSkill = (skill) => {
 
 @media (min-width: 768px) {
   .container {
-    max-width: 1400px; /* Adjust based on your needs */
+    max-width: 1400px;
   }
 }
 </style>
