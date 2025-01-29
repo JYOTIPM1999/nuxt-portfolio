@@ -67,7 +67,7 @@
 
             <!-- Links -->
             <div
-              class="flex gap-3 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300"
+              class="flex gap-3 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 sm:opacity-100 md:opacity-0 md:group-hover:opacity-100"
             >
               <a
                 :href="project.github"
@@ -280,6 +280,7 @@ const projects = ref([
   @apply transform hover:-translate-y-1;
   @apply hover:shadow-2xl hover:shadow-blue-500/10;
   transform-style: preserve-3d;
+  padding-bottom: 15px;
 }
 
 .tech-tag {

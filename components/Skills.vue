@@ -138,19 +138,19 @@
       </div>
 
       <!-- Skills Grid for Mobile -->
-      <div class="grid grid-cols-3 gap-3 mb-6">
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-6">
         <div
           v-for="skill in getSkillsByCategory(currentCategory)"
           :key="skill.name"
           @click="selectSkill(skill)"
-          class="skill-card-mobile p-3 active:scale-95"
+          class="skill-card-mobile p-4 active:scale-95"
         >
           <img
             :src="skill.icon"
             :alt="skill.name"
-            class="w-12 h-12 mx-auto mb-2"
+            class="w-12 h-12 mx-auto mb-3"
           />
-          <h3 class="text-center text-sm font-medium truncate">
+          <h3 class="text-center text-xs sm:text-sm font-medium leading-tight">
             {{ skill.name }}
           </h3>
         </div>
@@ -455,6 +455,7 @@ const selectSkill = (skill) => {
 
 .skill-card-mobile {
   @apply bg-white p-4 rounded-xl shadow-md flex-shrink-0 w-32 relative z-20;
+  @apply min-h-[120px] flex flex-col justify-center items-center;
 }
 
 .fade-enter-active,
