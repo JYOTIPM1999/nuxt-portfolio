@@ -23,7 +23,7 @@
       </button>
     </div>
 
-    <div class="relative min-h-[500px] md:h-[500px]">
+    <div class="relative min-h-[500px] md:min-h-[250px]">
       <Transition name="fade" mode="out-in">
         <div
           v-if="experiences[selectedExp]"
