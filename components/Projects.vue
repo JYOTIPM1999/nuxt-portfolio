@@ -97,7 +97,7 @@
         @click.self="selectedProject = null"
       >
         <div
-          class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6"
+          class="bg-white rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto p-6"
         >
           <div class="flex justify-between items-start mb-4">
             <h3 class="text-2xl font-bold">{{ selectedProject.title }}</h3>

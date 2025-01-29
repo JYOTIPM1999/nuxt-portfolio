@@ -19,7 +19,7 @@
         ></div>
 
         <form @submit.prevent="handleSubmit" class="space-y-6 relative">
-          <div class="grid md:grid-cols-2 gap-6">
+          <div class="grid md:grid-cols-3 gap-6">
             <!-- Name Input -->
             <div class="form-group">
               <label for="name" class="form-label">Name</label>
@@ -35,6 +35,26 @@
                 <Transition name="fade">
                   <span v-if="errors.name" class="error-message">{{
                     errors.name
+                  }}</span>
+                </Transition>
+              </div>
+            </div>
+
+            <!-- Phone Input -->
+            <div class="form-group">
+              <label for="phone" class="form-label">Phone</label>
+              <div class="relative">
+                <input
+                  id="phone"
+                  v-model="form.phone"
+                  type="tel"
+                  class="form-input"
+                  :class="{ 'border-red-500': errors.phone }"
+                  placeholder="Your phone number"
+                />
+                <Transition name="fade">
+                  <span v-if="errors.phone" class="error-message">{{
+                    errors.phone
                   }}</span>
                 </Transition>
               </div>
@@ -129,12 +149,14 @@ const isSubmitting = ref(false);
 const form = reactive({
   name: "",
   email: "",
+  phone: "", // Added phone field
   message: "",
 });
 
 const errors = reactive({
   name: "",
   email: "",
+  phone: "", // Added phone field
   message: "",
 });
 
@@ -142,6 +164,7 @@ const validateForm = () => {
   let isValid = true;
   errors.name = "";
   errors.email = "";
+  errors.phone = ""; // Added phone error reset
   errors.message = "";
 
   if (!form.name.trim()) {
@@ -154,6 +177,11 @@ const validateForm = () => {
     isValid = false;
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
     errors.email = "Please enter a valid email";
+    isValid = false;
+  }
+
+  if (form.phone.trim() && !/^\+?[\d\s-()]+$/.test(form.phone)) {
+    errors.phone = "Please enter a valid phone number";
     isValid = false;
   }
 
@@ -175,6 +203,7 @@ const handleSubmit = async () => {
       // Reset form
       form.name = "";
       form.email = "";
+      form.phone = ""; // Added phone reset
       form.message = "";
 
       // Show success message (you can implement your own notification system)
