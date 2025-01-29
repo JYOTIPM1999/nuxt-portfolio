@@ -56,6 +56,7 @@
           </div>
         </div>
 
+        <!-- Desktop Menu -->
         <div class="hidden md:flex items-center space-x-12">
           <a
             v-for="section in sections"
@@ -66,6 +67,49 @@
           >
             {{ section.charAt(0).toUpperCase() + section.slice(1) }}
           </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button @click="toggleMenu" class="md:hidden text-white p-2">
+          <svg
+            class="w-6 h-6"
+            :class="{ 'rotate-90': isMenuOpen }"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              v-if="!isMenuOpen"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+            <path
+              v-else
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+
+        <!-- Mobile Menu Overlay -->
+        <div v-show="isMenuOpen" class="mobile-menu" @click="closeMenu">
+          <div class="mobile-menu-content" @click.stop>
+            <div class="flex flex-col space-y-6">
+              <a
+                v-for="section in sections"
+                :key="section"
+                @click="setActiveAndClose(section)"
+                class="mobile-nav-link"
+                :class="{ 'mobile-nav-link-active': active === section }"
+              >
+                {{ section.charAt(0).toUpperCase() + section.slice(1) }}
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
@@ -84,6 +128,27 @@ const sections = [
   "stats",
   "contacts",
 ];
+
+const isMenuOpen = ref(false);
+
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value;
+  if (isMenuOpen.value) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "";
+  }
+};
+
+const closeMenu = () => {
+  isMenuOpen.value = false;
+  document.body.style.overflow = "";
+};
+
+const setActiveAndClose = (section) => {
+  setActive(section);
+  closeMenu();
+};
 
 const checkActiveSection = () => {
   const sectionElements = sections.map((section) => ({
@@ -130,6 +195,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   window.removeEventListener("scroll", checkActiveSection);
+  document.body.style.overflow = "";
 });
 </script>
 
@@ -258,6 +324,38 @@ onUnmounted(() => {
   100% {
     transform: translateX(-50%) scale(1);
     opacity: 1;
+  }
+}
+
+.mobile-menu {
+  @apply fixed inset-0 z-50 bg-black/50 backdrop-blur-sm md:hidden;
+}
+
+.mobile-menu-content {
+  @apply fixed right-0 top-[70px] w-64 h-[calc(100vh-70px)];
+  @apply bg-gradient-to-b from-blue-600/95 to-purple-600/95;
+  @apply p-6 transform transition-transform duration-300 ease-in-out;
+  animation: slideIn 0.3s ease-out;
+}
+
+.mobile-nav-link {
+  @apply text-white/90 text-lg font-medium;
+  @apply block w-full py-3 px-4 rounded-lg;
+  @apply transition-all duration-200;
+  @apply hover:bg-white/10 hover:text-white;
+}
+
+.mobile-nav-link-active {
+  @apply bg-white/15 text-white font-semibold;
+  @apply relative;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
   }
 }
 </style>
