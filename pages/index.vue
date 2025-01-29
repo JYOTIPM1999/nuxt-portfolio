@@ -1,7 +1,6 @@
 <template>
   <Headers />
   <main class="main-content">
-    <!-- Background decorative elements -->
     <div class="fixed-background">
       <div class="blob-bg blob-1">
         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
@@ -12,7 +11,6 @@
           />
         </svg>
       </div>
-      <!-- New blobs -->
       <div class="blob-bg blob-2">
         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -91,7 +89,6 @@
   max-width: 1280px;
 }
 
-/* Background decorative elements */
 .fixed-background {
   @apply fixed inset-0 w-full h-full pointer-events-none overflow-hidden;
   z-index: -1;
