@@ -34,14 +34,14 @@
 
           <div class="flex gap-4">
             <a
-              href="https://github.com/yourusername"
+              href="https://github.com/JYOTIPM1999"
               target="_blank"
               class="px-4 py-2 rounded-lg bg-gray-900 text-white hover:bg-gray-800 transition-colors"
             >
               GitHub
             </a>
             <a
-              href="https://linkedin.com/in/yourusername"
+              href="https://www.linkedin.com/in/jyotiprakashmohapatra/"
               target="_blank"
               class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-500 transition-colors"
             >
