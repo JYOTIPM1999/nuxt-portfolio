@@ -70,7 +70,10 @@
         </div>
 
         <!-- Mobile Menu Button -->
-        <button @click="toggleMenu" class="md:hidden text-white p-2">
+        <button
+          @click="toggleMenu"
+          class="md:hidden text-white p-2 relative z-[60]"
+        >
           <svg
             class="w-6 h-6"
             :class="{ 'rotate-90': isMenuOpen }"
@@ -206,6 +209,7 @@ onUnmounted(() => {
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   height: 70px;
+  position: relative;
 }
 
 .header::before {
