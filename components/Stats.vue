@@ -128,11 +128,6 @@ const statsArray = computed(() => [
     color: "text-purple-600",
   },
   { label: "Following", value: stats.value.following, color: "text-blue-600" },
-  {
-    label: "Contributions",
-    value: totalContributions.value,
-    color: "text-purple-600",
-  },
 ]);
 
 const getLanguageColor = (language) => {
