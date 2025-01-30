@@ -99,23 +99,23 @@
 }
 
 .blob-1 {
-  @apply top-[10%] right-[5%] w-96 h-96;
-  animation: float 15s infinite;
-}
-
-.blob-2 {
-  @apply top-[40%] left-[5%] w-80 h-80;
-  animation: float 18s infinite reverse;
-}
-
-.blob-3 {
-  @apply bottom-[15%] right-[15%] w-72 h-72;
+  @apply top-[5%] right-[10%] w-96 h-96;
   animation: float 20s infinite;
 }
 
+.blob-2 {
+  @apply top-[35%] left-[8%] w-80 h-80;
+  animation: float 25s infinite reverse;
+}
+
+.blob-3 {
+  @apply bottom-[20%] right-[12%] w-72 h-72;
+  animation: float 22s infinite;
+}
+
 .blob-4 {
-  @apply top-[60%] left-[10%] w-64 h-64;
-  animation: float 17s infinite reverse;
+  @apply top-[55%] left-[15%] w-64 h-64;
+  animation: float 28s infinite reverse;
 }
 
 @keyframes float {
@@ -123,14 +123,17 @@
   100% {
     transform: translate(0, 0) rotate(0deg);
   }
-  25% {
-    transform: translate(5px, -5px) rotate(2deg);
+  20% {
+    transform: translate(15px, -15px) rotate(5deg);
   }
-  50% {
-    transform: translate(0, 10px) rotate(-2deg);
+  40% {
+    transform: translate(-10px, 20px) rotate(-8deg);
   }
-  75% {
-    transform: translate(-5px, -8px) rotate(1deg);
+  60% {
+    transform: translate(20px, 15px) rotate(3deg);
+  }
+  80% {
+    transform: translate(-15px, -20px) rotate(-5deg);
   }
 }
 
