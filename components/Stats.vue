@@ -105,6 +105,7 @@ const stats = ref({
   publicRepos: 0,
   followers: 0,
   following: 0,
+  stars: 0, // Add stars property
 });
 const languageStats = ref({});
 const totalContributions = ref(0);
@@ -115,6 +116,11 @@ const statsArray = computed(() => [
     label: "Repositories",
     value: stats.value.publicRepos,
     color: "text-blue-600",
+  },
+  {
+    label: "Stars", // Add stars stat
+    value: stats.value.stars,
+    color: "text-yellow-500",
   },
   {
     label: "Followers",
@@ -167,10 +173,23 @@ const fetchGitHubStats = async () => {
           "https://api.github.com/users/JYOTIPM1999"
         );
         const userData = await userResponse.json();
+
+        const reposResponse = await fetch(
+          "https://api.github.com/users/JYOTIPM1999/repos"
+        );
+        const reposData = await reposResponse.json();
+
+        // Calculate total stars
+        const totalStars = reposData.reduce(
+          (acc, repo) => acc + repo.stargazers_count,
+          0
+        );
+
         stats.value = {
           publicRepos: userData.public_repos,
           followers: userData.followers,
           following: userData.following,
+          stars: totalStars,
         };
       })(),
       fetchContributions(),
