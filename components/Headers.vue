@@ -197,12 +197,11 @@ onUnmounted(() => {
 
 <style scoped>
 .header {
-  @apply fixed top-0 left-0 right-0 z-50;
+  @apply top-0 left-0 right-0 z-50 relative md:fixed;
   background: rgba(255, 255, 255, 0.01);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   height: 70px;
-  position: relative;
 }
 
 .header::before {
