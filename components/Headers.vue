@@ -17,13 +17,6 @@
                   <stop offset="100%" style="stop-color: #9333ea" />
                 </linearGradient>
               </defs>
-              <circle
-                cx="50"
-                cy="50"
-                r="45"
-                fill="url(#logoGradient)"
-                class="logo-circle"
-              />
 
               <text
                 x="50"
@@ -230,11 +223,6 @@ onUnmounted(() => {
 
 .logo-container:hover .logo-svg {
   @apply scale-110;
-}
-
-.logo-circle {
-  transform-origin: center;
-  animation: pulse 2s ease-in-out infinite;
 }
 
 .logo-text-svg {
