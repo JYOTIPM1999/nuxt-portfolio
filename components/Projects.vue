@@ -179,7 +179,7 @@ const projects = ref([
       "Zod",
     ],
     github: "https://github.com/jyotipm1999/devsphere",
-    live: "https://devsphere-demo.onrender.com",
+    live: "https://devsphere-f6bz.onrender.com",
     features: [
       "Dual-token JWT authentication stored in secure httpOnly cookies with granular RBAC",
       "Normalized MongoDB schemas with Mongoose and compound indexes for rapid feed queries",
