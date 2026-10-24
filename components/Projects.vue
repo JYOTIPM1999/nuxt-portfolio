@@ -61,9 +61,11 @@
             </div>
 
             <div
+              v-if="project.github || project.live"
               class="flex gap-3 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 sm:opacity-100 md:opacity-0 md:group-hover:opacity-100"
             >
               <a
+                v-if="project.github"
                 :href="project.github"
                 target="_blank"
                 class="project-link github-link"
@@ -71,12 +73,24 @@
                 <i class="fab fa-github mr-2"></i> GitHub
               </a>
               <a
+                v-if="project.live"
                 :href="project.live"
                 target="_blank"
                 class="project-link live-link"
               >
                 <i class="fas fa-external-link-alt mr-2"></i> Live Demo
               </a>
+            </div>
+
+            <!-- Fallback badge for client/enterprise projects with proprietary code -->
+            <div
+              v-else
+              class="mt-3 flex items-center text-xs font-semibold text-gray-500 tracking-wide uppercase"
+            >
+              <span
+                class="inline-block w-2 h-2 rounded-full bg-blue-500 mr-2"
+              ></span>
+              Enterprise / Proprietary Project
             </div>
           </div>
         </div>
@@ -86,30 +100,38 @@
     <Transition name="fade">
       <div
         v-if="selectedProject"
-        class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+        class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 sm:p-6 md:p-8"
         @click.self="selectedProject = null"
       >
         <div
-          class="bg-white rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto p-6"
+          class="bg-white rounded-2xl max-w-2xl w-full max-h-[76vh] overflow-y-auto no-scrollbar p-6 shadow-2xl relative my-auto mt-20 md:mt-auto"
         >
           <div class="flex justify-between items-start mb-4">
-            <h3 class="text-2xl font-bold">{{ selectedProject.title }}</h3>
+            <h3 class="text-2xl font-bold text-gray-800 pr-4">
+              {{ selectedProject.title }}
+            </h3>
             <button
               @click="selectedProject = null"
-              class="text-gray-500 hover:text-gray-700"
+              class="text-gray-400 hover:text-gray-700 text-xl p-1 transition-colors"
+              aria-label="Close modal"
             >
               ✕
             </button>
           </div>
+
           <img
             :src="selectedProject.image"
             :alt="selectedProject.title"
-            class="w-full h-64 object-cover rounded-lg mb-4"
+            class="w-full h-56 sm:h-64 object-cover rounded-xl mb-5 shadow-sm"
           />
-          <p class="text-gray-600 mb-4">{{ selectedProject.description }}</p>
-          <div class="space-y-4">
+
+          <p class="text-gray-600 mb-5 leading-relaxed">
+            {{ selectedProject.description }}
+          </p>
+
+          <div class="space-y-5">
             <div>
-              <h4 class="font-semibold mb-2">Tech Stack</h4>
+              <h4 class="font-semibold text-gray-800 mb-2">Tech Stack</h4>
               <div class="flex flex-wrap gap-2">
                 <span
                   v-for="tech in selectedProject.techStack"
@@ -120,14 +142,11 @@
                 </span>
               </div>
             </div>
+
             <div>
-              <h4 class="font-semibold mb-2">Key Features</h4>
-              <ul class="list-disc list-inside space-y-1">
-                <li
-                  v-for="feature in selectedProject.features"
-                  :key="feature"
-                  class="text-gray-600"
-                >
+              <h4 class="font-semibold text-gray-800 mb-2">Key Features</h4>
+              <ul class="list-disc list-inside space-y-1.5 text-gray-600">
+                <li v-for="feature in selectedProject.features" :key="feature">
                   {{ feature }}
                 </li>
               </ul>
@@ -140,130 +159,140 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, watch, onUnmounted } from "vue";
 
 const selectedProject = ref(null);
 const projects = ref([
+  // --- Work Experience / Professional Projects ---
   {
     id: 1,
-    title: "E-commerce Platform",
+    title: "DevSphere - Social Platform Backend API",
     description:
-      "A full-featured e-commerce platform with real-time cart updates, payment processing, and admin dashboard.",
-    image: "https://picsum.photos/seed/ecom/800/600",
-    techStack: ["Next.js", "Node.js", "MongoDB", "Stripe", "Redux"],
-    github: "https://github.com/yourusername/ecommerce",
-    live: "https://ecommerce-demo.com",
+      "A scalable RESTful backend service featuring dual-token JWT authentication, granular RBAC, and a 1:1 real-time chat engine built with Socket.io.",
+    image: "https://picsum.photos/seed/devsphere/800/600",
+    techStack: [
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "Socket.io",
+      "TypeScript",
+      "Zod",
+    ],
+    github: "https://github.com/jyotipm1999/devsphere",
+    live: "https://devsphere-f6bz.onrender.com",
     features: [
-      "User authentication and authorization",
-      "Real-time cart updates",
-      "Payment processing with Stripe",
-      "Admin dashboard for product management",
-      "Order tracking system",
+      "Dual-token JWT authentication stored in secure httpOnly cookies with granular RBAC",
+      "Normalized MongoDB schemas with Mongoose and compound indexes for rapid feed queries",
+      "Real-time 1:1 chat engine with JWT handshake authentication, live presence tracking, and chat history",
+      "Strict payload validation using Zod and centralized error handling middleware",
+      "Hardened backend security with Helmet, express-rate-limit, and express-mongo-sanitize",
     ],
   },
   {
     id: 2,
-    title: "Social Media Dashboard",
+    title: "B2B Procurement Management Platform",
     description:
-      "Real-time social media analytics dashboard with data visualization and reporting features.",
-    image: "https://picsum.photos/seed/social/800/600",
-    techStack: ["Vue.js", "Express", "Socket.io", "Chart.js", "PostgreSQL"],
-    github: "https://github.com/yourusername/social-dashboard",
-    live: "https://social-dashboard-demo.com",
+      "Enterprise procurement application with core admin modules, multi-step workflows, and fine-grained access control.",
+    image: "https://picsum.photos/seed/procure/800/600",
+    techStack: [
+      "Next.js (SSR)",
+      "Vue.js",
+      "Nuxt.js",
+      "Auth0",
+      "Tailwind CSS",
+      "Zod",
+    ],
     features: [
-      "Real-time data updates",
-      "Interactive charts and graphs",
-      "Custom reporting tools",
-      "Multi-platform integration",
-      "Export functionality",
+      "Role-Based Access Control (RBAC) with fine-grained permissions and Auth0 authentication",
+      "Reusable, scalable UI components cutting new-feature delivery time by 25-30%",
+      "Complex multi-step forms with Zod schema validation reducing client-side payload mismatches by 70%",
+      "Performance optimization reducing initial page load time (LCP) from 4.3s down to 2.6s",
+      "Optimized inventory and order tracking administrative workflows",
     ],
   },
   {
     id: 3,
-    title: "Task Management App",
+    title: "AI Chatbot Customization Suite",
     description:
-      "Collaborative task management application with real-time updates and team features.",
-    image: "https://picsum.photos/seed/task/800/600",
-    techStack: ["React", "Firebase", "Material-UI", "Redux-Saga"],
-    github: "https://github.com/yourusername/task-manager",
-    live: "https://task-manager-demo.com",
+      "Modular Nuxt.js UI suite enabling non-technical users to design, configure, and deploy AI chatbots without developer assistance.",
+    image: "https://picsum.photos/seed/chatbot/800/600",
+    techStack: ["Nuxt.js", "Vue.js", "Pinia", "Tailwind CSS", "TypeScript"],
     features: [
-      "Team collaboration tools",
-      "Real-time task updates",
-      "File sharing system",
-      "Progress tracking",
-      "Calendar integration",
+      "Interactive configuration dashboard for conversational agents",
+      "Real-time UI component customizer tailored for non-technical users",
+      "State-hydrated client controls built with Pinia and TypeScript",
+      "Zero-code onboarding flow allowing direct deployment for operations teams",
     ],
   },
   {
     id: 4,
-    title: "AI Content Generator",
+    title: "Enterprise Operational Analytics Dashboards",
     description:
-      "AI-powered content generation tool for marketing and social media content.",
-    image: "https://picsum.photos/seed/ai/800/600",
-    techStack: ["Python", "TensorFlow", "React", "FastAPI", "Redis"],
-    github: "https://github.com/yourusername/ai-content",
-    live: "https://ai-content-demo.com",
+      "A suite of 10+ operational dashboards converting high-volume datasets into interactive visual insights for 20+ internal stakeholders.",
+    image: "https://picsum.photos/seed/dashboards/800/600",
+    techStack: ["React.js", "Chart.js", "JavaScript", "CSS3", "REST APIs"],
     features: [
-      "AI text generation",
-      "Image generation integration",
-      "Content scheduling",
-      "Template management",
-      "Analytics dashboard",
+      "Delivered 10+ interactive operational dashboards with responsive Chart.js components",
+      "Automated recurring reporting workflows, cutting manual reporting effort by 70%",
+      "Transformed complex tabular data into visual trend lines, bar charts, and drill-down graphs",
+      "Cross-functional stakeholder filtering with dynamic multi-metric data aggregations",
     ],
   },
   {
     id: 5,
-    title: "Fitness Tracking App",
+    title: "AI News Platform Subscription & Checkout",
     description:
-      "Mobile-first fitness tracking application with workout plans and progress monitoring.",
-    image: "https://picsum.photos/seed/fitness/800/600",
-    techStack: ["React Native", "Node.js", "MongoDB", "Express"],
-    github: "https://github.com/yourusername/fitness-app",
-    live: "https://fitness-app-demo.com",
+      "End-to-end subscription checkout experience for an AI-driven news portal, integrating secure payment processing.",
+    image: "https://picsum.photos/seed/ainews/800/600",
+    techStack: ["Next.js", "React.js", "Razorpay", "Tailwind CSS", "Node.js"],
     features: [
-      "Workout planning",
-      "Progress tracking",
-      "Nutrition monitoring",
-      "Social features",
-      "Exercise library",
+      "Integrated Razorpay payment gateway handling multi-tier subscriptions and billing cycles",
+      "Secure payment modal handling, transaction verification, and billing state sync",
+      "Responsive checkout funnel optimized for low drop-off rates",
+      "Instant subscription entitlement synchronization and access unlock",
     ],
   },
   {
     id: 6,
-    title: "Real Estate Platform",
+    title: "Reusable Enterprise Component System",
     description:
-      "Modern real estate platform with virtual tours and property management system.",
-    image: "https://picsum.photos/seed/realestate/800/600",
-    techStack: ["Vue.js", "Nuxt.js", "Node.js", "PostgreSQL"],
-    github: "https://github.com/yourusername/real-estate",
-    live: "https://real-estate-demo.com",
+      "Standardized UI component library built across 3 internal modules to accelerate feature rollout and eliminate code duplication.",
+    image: "https://picsum.photos/seed/designsystem/800/600",
+    techStack: [
+      "React.js",
+      "TypeScript",
+      "Vitest",
+      "Context API",
+      "Tailwind CSS",
+    ],
     features: [
-      "Virtual property tours",
-      "Advanced search filters",
-      "Appointment scheduling",
-      "Property comparison",
-      "Agent dashboard",
+      "Authored 15+ highly configurable React components with custom hooks and Context API",
+      "Standardized UI patterns accelerating sprint feature delivery by 25%",
+      "Implemented comprehensive unit test coverage (70+ components) reducing QA issues by 40-50%",
+      "Reduced Largest Contentful Paint (LCP) from 3.9s to 2.4s via code splitting and optimized render paths",
     ],
   },
-  {
-    id: 7,
-    title: "Learning Management System",
-    description:
-      "Comprehensive learning management system with course creation and student tracking.",
-    image: "https://picsum.photos/seed/lms/800/600",
-    techStack: ["React", "Django", "PostgreSQL", "Redis", "AWS"],
-    github: "https://github.com/yourusername/lms",
-    live: "https://lms-demo.com",
-    features: [
-      "Course management",
-      "Student progress tracking",
-      "Assignment system",
-      "Video conferencing",
-      "Resource library",
-    ],
-  },
+
+  // --- Existing Portfolio Projects ---
 ]);
+
+// Disable background scrolling when modal is open
+watch(selectedProject, (val) => {
+  if (typeof document !== "undefined") {
+    if (val) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }
+});
+
+// Clean up if component unmounts while modal is open
+onUnmounted(() => {
+  if (typeof document !== "undefined") {
+    document.body.style.overflow = "";
+  }
+});
 </script>
 
 <style scoped>
@@ -355,5 +384,14 @@ const projects = ref([
 .pagination-dot,
 .pagination-dot-active {
   display: none;
+}
+/* Hide scrollbar while keeping scroll functionality */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 </style>
