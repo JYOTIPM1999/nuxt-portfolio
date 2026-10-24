@@ -26,10 +26,10 @@
           <p class="text-xl text-gray-600">Frontend Developer</p>
 
           <p class="text-gray-600 leading-relaxed">
-            A passionate frontend developer with expertise in building modern
-            web applications. Specialized in React, Vue, and other modern
-            JavaScript frameworks. Committed to creating elegant, efficient, and
-            user-friendly solutions.
+            Frontend Developer | 3+ Years Experience | React.js, Next.js,
+            TypeScript, JavaScript, Vue.js, Nuxt.js, Redux, Node.js, Express.js,
+            MongoDB, Tailwind CSS, HTML, REST API Integration, Performance
+            Optimization, Backend, Hooks, Responsive Layout, API
           </p>
 
           <div class="flex gap-4">

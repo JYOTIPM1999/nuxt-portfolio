@@ -150,7 +150,9 @@
             :alt="skill.name"
             class="w-12 h-12 mx-auto mb-3"
           />
-          <h3 class="text-center text-xs sm:text-sm font-medium leading-tight">
+          <h3
+            class="text-center text-xs sm:text-sm font-medium leading-tight text-gray-800"
+          >
             {{ skill.name }}
           </h3>
         </div>
@@ -170,7 +172,11 @@
                 class="w-12 h-12 mr-4"
               />
               <div>
-                <h3 class="text-xl font-bold">{{ selectedSkill.name }}</h3>
+                <h3
+                  class="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                >
+                  {{ selectedSkill.name }}
+                </h3>
                 <p class="text-sm text-gray-500">
                   {{ selectedSkill.category }}
                 </p>
@@ -258,167 +264,303 @@ onMounted(() => {
 const categories = [
   "Frontend",
   "Backend",
-  "App Development",
   "Languages",
   "State Management",
+  "Validation & Security",
+  "Testing & Performance",
   "Development Tools",
 ];
 
 const skills = ref([
-  // Frontend
+  // ==========================================
+  // FRONTEND
+  // ==========================================
   {
-    name: "React",
+    name: "React.js",
     category: "Frontend",
     icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg",
     description:
-      "Modern React development with hooks, context, and state management solutions like Redux and Zustand.",
-    experienceLevel: 85,
-    projects: ["E-commerce Platform", "Social Media Dashboard", "Admin Panel"],
-  },
-  {
-    name: "Vue.js",
-    category: "Frontend",
-    icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/vuejs/vuejs-original.svg",
-    description:
-      "Vue 3 composition API and advanced features including slots, suspense, and teleport.",
+      "Enterprise React application development utilizing hooks, Context API, reusable component architectures, and performance optimization.",
     experienceLevel: 90,
-    projects: ["Portfolio Website", "Customer Management System"],
-  },
-  {
-    name: "Nuxt.js",
-    category: "Frontend",
-    icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/nuxtjs/nuxtjs-original.svg",
-    description:
-      "Server-side rendering, static site generation, and dynamic routing with Nuxt 3.",
-    experienceLevel: 85,
-    projects: ["Personal Portfolio", "E-commerce Site"],
+    projects: [
+      "Operational Dashboards (PwC)",
+      "Internal Feature Modules (Webreinvent)",
+      "DevSphere Demo Client",
+    ],
   },
   {
     name: "Next.js",
     category: "Frontend",
     icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/nextjs/nextjs-original.svg",
     description:
-      "Server-side rendering and static site generation with Next.js.",
-    experienceLevel: 80,
-    projects: ["Blog Platform", "E-learning Portal"],
+      "Server-side rendering (SSR), static generation, and scalable UI component architecture for high-performance enterprise applications.",
+    experienceLevel: 85,
+    projects: [
+      "B2B Procurement Management Platform",
+      "AI-Powered News Platform",
+    ],
   },
   {
-    name: "HTML5",
+    name: "Vue.js",
+    category: "Frontend",
+    icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/vuejs/vuejs-original.svg",
+    description:
+      "Modern Vue.js development leveraging the Composition API, reactive state management, and reusable UI structures.",
+    experienceLevel: 85,
+    projects: ["Client Enterprise Dashboards", "B2B Procurement Platform"],
+  },
+  {
+    name: "Nuxt.js",
+    category: "Frontend",
+    icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/nuxtjs/nuxtjs-original.svg",
+    description:
+      "Full-stack SSR framework development, building modular UI suites and dynamic routing solutions.",
+    experienceLevel: 85,
+    projects: ["AI Chatbot Customization Suite", "Enterprise Web Applications"],
+  },
+  {
+    name: "Tailwind CSS",
+    category: "Frontend",
+    icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/tailwindcss/tailwindcss-original.svg",
+    description:
+      "Utility-first styling, rapid responsive design implementation, custom theme setups, and fluid interface animations.",
+    experienceLevel: 90,
+    projects: [
+      "B2B Procurement Management Platform",
+      "AI Chatbot Customization Suite",
+      "Portfolio Website",
+    ],
+  },
+  {
+    name: "Chart.js",
+    category: "Frontend",
+    icon: "https://www.chartjs.org/img/chartjs-logo.svg",
+    description:
+      "Data visualization engine used to transform complex datasets into responsive, interactive visual charts and analytics dashboards.",
+    experienceLevel: 85,
+    projects: [
+      "Operational Stakeholder Dashboards (PwC)",
+      "Automated Reporting Workflows",
+    ],
+  },
+  {
+    name: "HTML5 & CSS3",
     category: "Frontend",
     icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg",
-    description: "Semantic HTML, accessibility, and modern web standards.",
+    description:
+      "Semantic markup, modern layout techniques (Flexbox, CSS Grid), responsive design standards, and accessibility.",
     experienceLevel: 95,
-    projects: ["Various Web Applications", "Landing Pages"],
-  },
-  {
-    name: "CSS3",
-    category: "Frontend",
-    icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg",
-    description: "Advanced CSS including Flexbox, Grid, and animations.",
-    experienceLevel: 90,
-    projects: ["Responsive Layouts", "Interactive UIs"],
+    projects: [
+      "Enterprise Client Products",
+      "Operational Dashboards",
+      "Interactive Web UIs",
+    ],
   },
 
-  // Backend
+  // ==========================================
+  // BACKEND & APIS
+  // ==========================================
   {
     name: "Node.js",
     category: "Backend",
     icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg",
-    description: "Server-side JavaScript runtime environment.",
-    experienceLevel: 85,
-    projects: ["REST APIs", "Real-time Applications"],
+    description:
+      "Asynchronous server-side runtime for building scalable RESTful microservices, API layers, and real-time backend engines.",
+    experienceLevel: 80,
+    projects: ["DevSphere Backend System", "Custom Server Endpoints"],
   },
   {
     name: "Express.js",
     category: "Backend",
     icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original.svg",
     description:
-      "Web application framework for Node.js with middleware architecture.",
-    experienceLevel: 80,
-    projects: ["RESTful APIs", "Authentication Systems"],
+      "Robust web routing framework with centralized error-handling middlewares, request sanitization, and enterprise security policies.",
+    experienceLevel: 85,
+    projects: [
+      "DevSphere Social Platform API",
+      "Enterprise Middleware Architectures",
+    ],
   },
   {
-    name: "MongoDB",
+    name: "MongoDB & Mongoose",
     category: "Backend",
     icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original.svg",
-    description: "NoSQL database design and optimization.",
-    experienceLevel: 75,
-    projects: ["User Management", "Content Management"],
-  },
-
-  // App Development
-  {
-    name: "React Native",
-    category: "App Development",
-    icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg",
-    description: "Cross-platform mobile development with React Native.",
-    experienceLevel: 75,
-    projects: ["Mobile Apps", "Cross-platform Applications"],
-  },
-  {
-    name: "Expo",
-    category: "App Development",
-    icon: "https://cdn.worldvectorlogo.com/logos/expo-1.svg", // New Expo icon URL
-    description: "Framework and platform for universal React applications.",
-    experienceLevel: 70,
-    projects: ["Mobile Development", "Quick Prototypes"],
-  },
-
-  // Languages
-  {
-    name: "JavaScript",
-    category: "Languages",
-    icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg",
     description:
-      "ES6+ features, async programming, and modern JavaScript concepts.",
-    experienceLevel: 90,
-    projects: ["Web Applications", "Server Development"],
+      "NoSQL schema modeling, validation, aggregation pipelines, and compound index optimization for rapid data retrieval.",
+    experienceLevel: 80,
+    projects: ["DevSphere Social Platform API", "Feed & Messaging Data Models"],
   },
+  {
+    name: "Socket.io",
+    category: "Backend",
+    icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/socketio/socketio-original.svg",
+    description:
+      "Event-driven real-time bi-directional communication, online presence detection, JWT handshakes, and chat history persistence.",
+    experienceLevel: 80,
+    projects: ["DevSphere 1:1 Real-Time Chat Engine", "Live Presence Tracker"],
+  },
+  {
+    name: "RESTful APIs",
+    category: "Backend",
+    icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/fastapi/fastapi-original.svg",
+    description:
+      "Architecture of end-to-end REST endpoints with strict HTTP status handling, payload filtering, and rate limiting.",
+    experienceLevel: 85,
+    projects: ["DevSphere Backend System", "B2B Procurement Integrations"],
+  },
+
+  // ==========================================
+  // LANGUAGES
+  // ==========================================
   {
     name: "TypeScript",
     category: "Languages",
     icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg",
-    description: "Static typing, interfaces, and advanced TypeScript features.",
+    description:
+      "Static typing, structural typing interfaces, generics, and compile-time verification across frontend and backend codebases.",
     experienceLevel: 85,
-    projects: ["Enterprise Applications", "Type-safe Development"],
+    projects: [
+      "Enterprise Frontend Dashboards",
+      "Scalable Component Libraries",
+      "DevSphere System",
+    ],
+  },
+  {
+    name: "JavaScript (ES6+)",
+    category: "Languages",
+    icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg",
+    description:
+      "Modern JavaScript standards, asynchronous event loops, closures, promises, modular imports, and functional programming.",
+    experienceLevel: 90,
+    projects: [
+      "Webspiders Client Products",
+      "Webreinvent Modules",
+      "PwC Dashboards",
+    ],
   },
 
-  // State Management
+  // ==========================================
+  // STATE MANAGEMENT
+  // ==========================================
   {
-    name: "Redux",
+    name: "Redux & Zustand",
     category: "State Management",
     icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg",
     description:
-      "State management with Redux, including Redux Toolkit and middleware.",
-    experienceLevel: 80,
-    projects: ["Large Scale Applications", "E-commerce Platforms"],
+      "Centralized immutable state management for complex React single-page applications and streamlined lightweight store slices.",
+    experienceLevel: 85,
+    projects: ["Enterprise Web Applications", "Multi-Module UI Architectures"],
   },
   {
     name: "Pinia",
     category: "State Management",
     icon: "https://pinia.vuejs.org/logo.svg",
     description:
-      "State management for Vue.js applications with composition API support.",
-    experienceLevel: 85,
-    projects: ["Vue.js Applications", "Nuxt.js Projects"],
+      "Intuitive Vue 3 modular store architecture with full TypeScript support and reactive state hydration.",
+    experienceLevel: 80,
+    projects: ["Nuxt.js Chatbot UI Suite", "Vue Enterprise Dashboards"],
   },
 
-  // Development Tools
+  // ==========================================
+  // VALIDATION & SECURITY
+  // ==========================================
   {
-    name: "NPM",
-    category: "Development Tools",
-    icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/npm/npm-original-wordmark.svg",
-    description: "Package management and build tools for JavaScript projects.",
-    experienceLevel: 90,
-    projects: ["Package Management", "Build Automation"],
+    name: "Zod",
+    category: "Validation & Security",
+    icon: "https://raw.githubusercontent.com/colinhacks/zod/master/logo.svg",
+    description:
+      "TypeScript-first schema validation with static type inference, handling multi-step forms and backend API payload boundaries.",
+    experienceLevel: 85,
+    projects: [
+      "B2B Procurement Multi-Step Forms",
+      "DevSphere Request Validation Middleware",
+    ],
   },
   {
-    name: "Git",
+    name: "Auth0 & JWT (RBAC)",
+    category: "Validation & Security",
+    icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/oauth/oauth-original.svg",
+    description:
+      "Role-Based Access Control, dual-token JWT auth using httpOnly cookies, and enterprise single sign-on (SSO) integrations.",
+    experienceLevel: 85,
+    projects: [
+      "B2B Procurement Dashboards (Auth0)",
+      "DevSphere Private Endpoint Guard (Dual-Token JWT)",
+    ],
+  },
+  {
+    name: "Razorpay",
+    category: "Validation & Security",
+    icon: "https://avatars.githubusercontent.com/u/7713209?s=200&v=4",
+    description:
+      "Payment gateway integration handling recurring subscription billing flows, checkout modal lifecycle, and webhook verification.",
+    experienceLevel: 80,
+    projects: ["AI-Powered News Platform Subscription Flow"],
+  },
+
+  // ==========================================
+  // TESTING & PERFORMANCE
+  // ==========================================
+  {
+    name: "Unit & Integration Testing",
+    category: "Testing & Performance",
+    icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/vitest/vitest-original.svg",
+    description:
+      "Vitest and unit testing practices for UI components, reducing recurring production bugs and ensuring reliable sprint releases.",
+    experienceLevel: 80,
+    projects: [
+      "70+ Reusable Components (Webreinvent)",
+      "Critical Enterprise Flows",
+    ],
+  },
+  {
+    name: "Core Web Vitals & Optimization",
+    category: "Testing & Performance",
+    icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/chrome/chrome-original.svg",
+    description:
+      "Frontend performance engineering optimizing LCP, FCP, INP, code splitting, lazy loading, and Lighthouse audit scores.",
+    experienceLevel: 85,
+    projects: [
+      "Webspiders LCP Optimization (4.3s to 2.6s)",
+      "Webreinvent Render Speed (3.9s to 2.4s)",
+    ],
+  },
+
+  // ==========================================
+  // DEVELOPMENT TOOLS
+  // ==========================================
+  {
+    name: "Git & GitHub / GitLab",
     category: "Development Tools",
     icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original.svg",
-    description: "Version control and collaboration using Git.",
+    description:
+      "Distributed version control, feature-branch workflows, collaborative code reviews, PR management, and issue tracking.",
+    experienceLevel: 90,
+    projects: [
+      "Multi-Repository Enterprise Teams",
+      "DevSphere Open-Source Architecture",
+    ],
+  },
+  {
+    name: "Postman",
+    category: "Development Tools",
+    icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/postman/postman-original.svg",
+    description:
+      "API testing, request collection structuring, automated environment variables, and authentication flow validation.",
     experienceLevel: 85,
-    projects: ["Version Control", "Team Collaboration"],
+    projects: [
+      "DevSphere API Testing Suite",
+      "B2B Procurement Integration Verification",
+    ],
+  },
+  {
+    name: "Jira",
+    category: "Development Tools",
+    icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/jira/jira-original.svg",
+    description:
+      "Agile and Scrum sprint tracking, backlog grooming, ticket estimation, and cross-functional team delivery.",
+    experienceLevel: 85,
+    projects: ["Sprint Deliveries across Webspiders & Webreinvent"],
   },
 ]);
 
@@ -454,8 +596,8 @@ const selectSkill = (skill) => {
 }
 
 .skill-card-mobile {
-  @apply bg-white p-4 rounded-xl shadow-md flex-shrink-0 w-32 relative z-20;
-  @apply min-h-[120px] flex flex-col justify-center items-center;
+  @apply bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-200;
+  @apply min-h-[120px] flex flex-col justify-center items-center cursor-pointer;
 }
 
 .fade-enter-active,
@@ -494,11 +636,6 @@ const selectSkill = (skill) => {
     position: relative;
     z-index: 10;
   }
-}
-
-.skill-card-mobile {
-  @apply bg-white rounded-xl shadow-sm transition-all duration-200;
-  @apply active:shadow-inner cursor-pointer;
 }
 
 .slide-up-enter-active,
