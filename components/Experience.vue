@@ -6,6 +6,7 @@
       Professional Experience
     </h2>
 
+    <!-- Company selection buttons -->
     <div class="flex flex-wrap gap-4 justify-center mb-8">
       <button
         v-for="(exp, index) in experiences"
@@ -23,12 +24,13 @@
       </button>
     </div>
 
-    <div class="relative min-h-[500px] md:min-h-[250px]">
+    <!-- Experience Card Container (Relative with natural height) -->
+    <div class="relative w-full max-w-3xl mx-auto">
       <Transition name="fade" mode="out-in">
         <div
           v-if="experiences[selectedExp]"
           :key="selectedExp"
-          class="bg-white rounded-xl shadow-2xl p-8 max-w-3xl mx-auto transition-all duration-300 md:absolute md:w-full md:left-0 md:right-0"
+          class="bg-white rounded-xl shadow-2xl p-8 transition-all duration-300 w-full"
         >
           <div class="relative">
             <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
@@ -71,12 +73,17 @@ const experiences = ref([
   {
     company: "Web Spiders Group",
     position: "Associate Frontend Developer",
-    period: "Aug 2024 - Present",
+    period: "Aug 2024 - July 2026",
     location: "Kolkata, India",
     description: [
-      "Led development of microservices architecture",
-      "Managed team of 5 developers",
-      "Improved system performance by 40%",
+      "Developed and managed a B2B procurement management platform, focusing on core admin modules for efficient inventory and order management workflows.",
+      "Implemented Role-Based Access Control (RBAC) with fine-grained permissions and secure authentication using Auth0, enhancing security for enterprise-level dashboards.",
+      "Architected scalable and reusable UI components utilizing Next.js (SSR), Vue.js/Nuxt.js, and Tailwind CSS, resulting in a 50-60% reduction in new feature build time.",
+      "Created multi-step forms integrated with Zod validation, leading to a 70% decrease in form submission errors.",
+      "Optimized initial page load time from 4.3 seconds to 2.6 seconds (LCP) by employing lazy loading, code splitting, and refined API calls.",
+      "Automated recurring reporting workflows, significantly reducing manual reporting time from hours to mere minutes.",
+      "Developed a subscription-based payment flow for an AI-powered news platform, integrating Razorpay for seamless transactions.",
+      "Designed a modular Nuxt.js UI suite for an AI chatbot customization product, empowering non-technical users to configure chatbots without needing developer assistance.",
     ],
   },
   {
@@ -85,9 +92,10 @@ const experiences = ref([
     period: "Apr 2024 - July 2024",
     location: "Delhi, India",
     description: [
-      "Developed and maintained client websites",
-      "Implemented CI/CD pipelines",
-      "Reduced deployment time by 60%",
+      "Built a shared library of 20+ reusable React components adopted by 10 feature teams, cutting average new feature build time by 35% and eliminating duplicate component code across the platform",
+      "Increased development speed by 50% through systematic component reuse",
+      "Implemented unit tests (70+ components), reducing recurring QA-reported issues by 40-50%",
+      "Improved page render speed from 3.9s to 2.4s using code splitting and efficient rendering techniques",
     ],
   },
   {
@@ -96,9 +104,9 @@ const experiences = ref([
     period: "May 2023 - Jan 2024",
     location: "Gurugram, India",
     description: [
-      "Built responsive web applications",
-      "Optimized frontend performance",
-      "Collaborated with UX team",
+      "Delivered 10+ operational dashboards in React.js, integrating Chart.js for 20+ internal stakeholders",
+      "Automated reporting workflows, reducing manual effort by 70%",
+      "Converted complex datasets into interactive visual insights, improving reporting clarity for 5+ stakeholders",
     ],
   },
   {
@@ -107,9 +115,10 @@ const experiences = ref([
     period: "Oct 2019 - Feb 2022",
     location: "Bhubaneswar, India",
     description: [
-      "Developed UI components",
-      "Fixed bugs and improved features",
-      "Participated in code reviews",
+      "Assisted in the preparation of financial statements and reports for clients, ensuring accuracy and compliance with accounting standards.",
+      "Conducted audits and internal reviews of client accounts, identifying discrepancies and recommending corrective actions.",
+      "Collaborated with senior accountants to analyze financial data and provide insights for business decision-making.",
+      "Prepared tax returns and ensured timely submission, while staying updated on changes in tax regulations.",
     ],
   },
 ]);
@@ -122,23 +131,23 @@ const experiences = ref([
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: all 0.4s ease;
+  transition: all 0.3s ease;
 }
 
 .fade-enter-from {
   opacity: 0;
-  transform: translateX(30px);
+  transform: translateY(10px);
 }
 
 .fade-leave-to {
   opacity: 0;
-  transform: translateX(-30px);
+  transform: translateY(-10px);
 }
 
 @keyframes slideIn {
   from {
     opacity: 0;
-    transform: translateX(-20px);
+    transform: translateX(-15px);
   }
   to {
     opacity: 1;
@@ -147,7 +156,7 @@ const experiences = ref([
 }
 
 .animate-slide-in {
-  animation: slideIn 0.5s ease forwards;
+  animation: slideIn 0.4s ease forwards;
 }
 
 .animate-fade-in {
@@ -170,12 +179,6 @@ const experiences = ref([
 
   button {
     @apply w-full max-w-xs;
-  }
-
-  .relative {
-    min-height: auto;
-    height: auto;
-    margin-bottom: 2rem;
   }
 }
 </style>

@@ -150,7 +150,9 @@
             :alt="skill.name"
             class="w-12 h-12 mx-auto mb-3"
           />
-          <h3 class="text-center text-xs sm:text-sm font-medium leading-tight">
+          <h3
+            class="text-center text-xs sm:text-sm font-medium leading-tight text-gray-800"
+          >
             {{ skill.name }}
           </h3>
         </div>
@@ -454,8 +456,8 @@ const selectSkill = (skill) => {
 }
 
 .skill-card-mobile {
-  @apply bg-white p-4 rounded-xl shadow-md flex-shrink-0 w-32 relative z-20;
-  @apply min-h-[120px] flex flex-col justify-center items-center;
+  @apply bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-200;
+  @apply min-h-[120px] flex flex-col justify-center items-center cursor-pointer;
 }
 
 .fade-enter-active,
@@ -494,11 +496,6 @@ const selectSkill = (skill) => {
     position: relative;
     z-index: 10;
   }
-}
-
-.skill-card-mobile {
-  @apply bg-white rounded-xl shadow-sm transition-all duration-200;
-  @apply active:shadow-inner cursor-pointer;
 }
 
 .slide-up-enter-active,
